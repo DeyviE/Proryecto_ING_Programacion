@@ -5,6 +5,9 @@ from servicios.listar_usuarios import ListarUsuarios
 from servicios.prestar_libro import PrestarLibro
 from servicios.listar_libros_prestados import ListarLibrosPrestados
 from servicios.devolver_libro import DevolverLibro
+from modelos.GestionBiblioteca import GestionBiblioteca
+
+gestion = GestionBiblioteca()
 
 def menu():
     while True:
@@ -40,7 +43,8 @@ def menu():
         elif opcion == '5':
             libro_id   = int(input("ID del libro: "))
             usuario_id = int(input("ID del usuario: "))
-            PrestarLibro().ejecutar(libro_id, usuario_id)
+            PrestarLibro(gestion).ejecutar(libro_id, usuario_id)
+
 
         elif opcion == '6':
             ListarLibrosPrestados().ejecutar()
