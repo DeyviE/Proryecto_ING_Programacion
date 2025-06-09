@@ -5,11 +5,14 @@ from servicios.listar_usuarios import ListarUsuarios
 from servicios.prestar_libro import PrestarLibro
 from servicios.listar_libros_prestados import ListarLibrosPrestados
 from servicios.devolver_libro import DevolverLibro
-from modelos.GestionBiblioteca import GestionBiblioteca
-from modelos.GestionBiblioteca import GestionBiblioteca
+from servicios.actividad_usuario import ActividadUsuario
+from servicios.modificar_usuario import ModificarUsuario
+from servicios.modificar_libro import ModificarLibro
+from servicios.modificar_prestamo import ModificarPrestamo
+from servicios.eliminar_usuario import EliminarUsuario
+from servicios.eliminar_libro import EliminarLibro
+from servicios.eliminar_prestamo import EliminarPrestamo
 
-
-gestion = GestionBiblioteca()
 
 def menu():
     while True:
@@ -25,6 +28,11 @@ def menu():
         print("12. Modificar información de un usuario")
         print("13. Modificar información de un libro")
         print("14. Modificar un préstamo")
+        print("15. Eliminar un usuario")
+        print("16. Eliminar un libro")
+        print("17. Eliminar un préstamo")
+
+
         print("20. Salir")
 
         opcion = input("Elige una opción: ")
@@ -49,8 +57,7 @@ def menu():
         elif opcion == '5':
             libro_id   = int(input("ID del libro: "))
             usuario_id = int(input("ID del usuario: "))
-            PrestarLibro(gestion).ejecutar(libro_id, usuario_id)
-
+            PrestarLibro().ejecutar(libro_id, usuario_id)
 
         elif opcion == '6':
             ListarLibrosPrestados().ejecutar()
@@ -58,6 +65,7 @@ def menu():
         elif opcion == '7':
             libro_id = int(input("ID del libro a devolver: "))
             DevolverLibro().ejecutar(libro_id)
+
         elif opcion == '9':
             usuario_id = int(input("ID del usuario: "))
             ActividadUsuario().ejecutar(usuario_id)
@@ -86,6 +94,19 @@ def menu():
             else:
                 nueva_fecha_devolucion = None
             ModificarPrestamo().ejecutar(prestamo_id, nuevo_libro_id, nuevo_usuario_id, nueva_fecha_prestamo, nueva_fecha_devolucion)
+        
+        elif opcion == '15':
+            usuario_id = int(input("ID del usuario a eliminar: "))
+            EliminarUsuario().ejecutar(usuario_id)
+
+        elif opcion == '16':
+            libro_id = int(input("ID del libro a eliminar: "))
+            EliminarLibro().ejecutar(libro_id)
+
+        elif opcion == '17':
+            prestamo_id = int(input("ID del préstamo a eliminar: "))
+            EliminarPrestamo().ejecutar(prestamo_id)
+
 
 
         elif opcion == '20':
