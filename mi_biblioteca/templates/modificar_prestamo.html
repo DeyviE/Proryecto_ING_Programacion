@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Préstamo</title>
+</head>
+<body>
+    <h1>Modificar Préstamo (ID: {{ prestamo_id }})</h1>
+    <form action="/prestamos/modificar/{{ prestamo_id }}" method="POST">
+        <label for="nuevo_libro_id">Nuevo ID de Libro:</label><br>
+        <input type="number" id="nuevo_libro_id" name="nuevo_libro_id" required><br><br>
+        <label for="nuevo_usuario_id">Nuevo ID de Usuario:</label><br>
+        <input type="number" id="nuevo_usuario_id" name="nuevo_usuario_id" required><br><br>
+        <label for="nueva_fecha_prestamo">Nueva Fecha de Préstamo (YYYY-MM-DD):</label><br>
+        <input type="date" id="nueva_fecha_prestamo" name="nueva_fecha_prestamo" required><br><br>
+        
+        <input type="checkbox" id="devolver" name="devolver" onchange="toggleDevolucionDate()">
+        <label for="devolver">¿Ya se devolvió el libro?</label><br><br>
+
+        <div id="fechaDevolucionDiv" style="display: none;">
+            <label for="nueva_fecha_devolucion">Nueva Fecha de Devolución (YYYY-MM-DD):</label><br>
+            <input type="date" id="nueva_fecha_devolucion" name="nueva_fecha_devolucion"><br><br>
+        </div>
+
+        <input type="submit" value="Guardar Cambios">
+    </form>
+
+    <script>
+        function toggleDevolucionDate() {
+            var checkbox = document.getElementById("devolver");
+            var fechaDevolucionDiv = document.getElementById("fechaDevolucionDiv");
+            if (checkbox.checked) {
+                fechaDevolucionDiv.style.display = "block";
+                document.getElementById("nueva_fecha_devolucion").setAttribute("required", "required");
+            } else {
+                fechaDevolucionDiv.style.display = "none";
+                document.getElementById("nueva_fecha_devolucion").removeAttribute("required");
+                document.getElementById("nueva_fecha_devolucion").value = ""; // Clear the date if unchecked
+            }
+        }
+    </script>
+    <br>
+    <a href="/prestamos">Volver a la Lista de Préstamos</a> | <a href="/">Volver al Menú Principal</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Usuario</title>
+</head>
+<body>
+    <h1>Modificar Usuario (ID: {{ usuario_id }})</h1>
+    <form action="/usuarios/modificar/{{ usuario_id }}" method="POST">
+        <label for="nuevo_nombre">Nuevo Nombre:</label><br>
+        <input type="text" id="nuevo_nombre" name="nuevo_nombre" required><br><br>
+        <label for="nuevo_correo">Nuevo Correo:</label><br>
+        <input type="email" id="nuevo_correo" name="nuevo_correo" required><br><br>
+        <input type="submit" value="Guardar Cambios">
+    </form>
+    <br>
+    <a href="/usuarios">Volver a la Lista de Usuarios</a> | <a href="/">Volver al Menú Principal</a>
+</body>
+</html>

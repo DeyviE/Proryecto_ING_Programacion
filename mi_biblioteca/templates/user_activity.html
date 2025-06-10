@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad del Usuario {{ usuario_id }}</title>
+</head>
+<body>
+    <h1>Actividad del Usuario {{ usuario_id }}</h1>
+    {% if actividad %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID Préstamo</th>
+                    <th>ID Libro</th>
+                    <th>Título del Libro</th>
+                    <th>Fecha Préstamo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in actividad %}
+                <tr>
+                    <td>{{ item.prestamo_id }}</td>
+                    <td>{{ item.libro_id }}</td>
+                    <td>{{ item.titulo_libro }}</td>
+                    <td>{{ item.fecha_prestamo }}</td>
+                    <td>{{ item.estado }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se encontraron préstamos para el usuario con ID {{ usuario_id }}.</p>
+    {% endif %}
+    <br>
+    <a href="/usuarios">Volver a la Lista de Usuarios</a> | <a href="/">Volver al Menú Principal</a>
+</body>
+</html>

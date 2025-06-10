@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Préstamos</title>
+</head>
+<body>
+    <h1>Lista de Préstamos</h1>
+    <a href="/prestamos/prestar">Realizar Nuevo Préstamo</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Préstamo</th>
+                <th>Libro</th>
+                <th>Usuario</th>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestamo in prestamos %}
+            <tr>
+                <td>{{ prestamo.prestamo_id }}</td>
+                <td>{{ prestamo.titulo_libro }}</td>
+                <td>{{ prestamo.nombre_usuario }}</td>
+                <td>{{ prestamo.fecha_prestamo }}</td>
+                <td>{{ prestamo.fecha_devolucion }}</td>
+                <td>
+                    <a href="/prestamos/modificar/{{ prestamo.prestamo_id }}">Modificar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Volver al Menú Principal</a>
+</body>
+</html>

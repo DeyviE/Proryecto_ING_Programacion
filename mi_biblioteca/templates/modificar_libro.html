@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Libro</title>
+</head>
+<body>
+    <h1>Modificar Libro (ID: {{ libro_id }})</h1>
+    <form action="/libros/modificar/{{ libro_id }}" method="POST">
+        <label for="nuevo_titulo">Nuevo Título:</label><br>
+        <input type="text" id="nuevo_titulo" name="nuevo_titulo" required><br><br>
+        <label for="nuevo_autor">Nuevo Autor:</label><br>
+        <input type="text" id="nuevo_autor" name="nuevo_autor" required><br><br>
+        <label for="nuevo_isbn">Nuevo ISBN:</label><br>
+        <input type="text" id="nuevo_isbn" name="nuevo_isbn" required><br><br>
+        <input type="submit" value="Guardar Cambios">
+    </form>
+    <br>
+    <a href="/libros">Volver a la Lista de Libros</a> | <a href="/">Volver al Menú Principal</a>
+</body>
+</html>

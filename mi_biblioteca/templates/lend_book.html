@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestar Libro</title>
+</head>
+<body>
+    <h1>Prestar Libro</h1>
+    <form action="/prestamos/prestar" method="POST">
+        <label for="libro_id">ID del Libro:</label><br>
+        <input type="number" id="libro_id" name="libro_id" required><br><br>
+        <label for="usuario_id">ID del Usuario:</label><br>
+        <input type="number" id="usuario_id" name="usuario_id" required><br><br>
+        <input type="submit" value="Prestar Libro">
+    </form>
+    <br>
+    <a href="/prestamos">Volver a la Lista de Préstamos</a> | <a href="/">Volver al Menú Principal</a>
+</body>
+</html>
