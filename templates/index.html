@@ -1,20 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Biblioteca</title>
-</head>
-<body>
-    <h1>Bienvenido al Sistema de Biblioteca</h1>
-    <ul>
-        <li><a href="/libros">Listar Libros</a></li>
-        <li><a href="/libros/agregar">Agregar Libro</a></li>
-        <li><a href="/usuarios">Listar Usuarios</a></li>
-        <li><a href="/usuarios/agregar">Agregar Usuario</a></li>
-        <li><a href="/prestamos">Listar Préstamos</a></li>
-        <li><a href="/prestamos/prestar">Prestar Libro</a></li>
-        <li><a href="/prestamos/devolver">Devolver Libro</a></li>
-        </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Bienvenido a la Biblioteca{% endblock %}
+
+{% block content %}
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-3">Tu Biblioteca Digital al Alcance de tu Mano</h1>
+            <p class="lead">Gestiona libros, usuarios y préstamos de forma sencilla y eficiente.</p>
+            <a href="/libros/agregar" class="btn btn-primary btn-lg">¡Agrega tu primer libro!</a>
+            <a href="/prestamos/prestar" class="btn btn-outline-light btn-lg">Préstamo Rápido</a>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-5">Explora las Funcionalidades Clave</h2>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="feature-card">
+                    <i class="fas fa-book icon"></i>
+                    <h5>Gestión de Libros</h5>
+                    <p class="text-muted">Añade, visualiza y modifica el catálogo de libros.</p>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item"><a href="/libros"><i class="fas fa-list me-2"></i>Ver todos los libros</a></li>
+                        <li class="list-group-item"><a href="/libros/agregar"><i class="fas fa-plus-circle me-2"></i>Añadir nuevo libro</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="feature-card">
+                    <i class="fas fa-users icon"></i>
+                    <h5>Gestión de Usuarios</h5>
+                    <p class="text-muted">Administra la información de los usuarios y su actividad.</p>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item"><a href="/usuarios"><i class="fas fa-user-friends me-2"></i>Listar usuarios</a></li>
+                        <li class="list-group-item"><a href="/usuarios/agregar"><i class="fas fa-user-plus me-2"></i>Registrar nuevo usuario</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="feature-card">
+                    <i class="fas fa-exchange-alt icon"></i>
+                    <h5>Control de Préstamos</h5>
+                    <p class="text-muted">Registra y gestiona los préstamos y devoluciones.</p>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item"><a href="/prestamos"><i class="fas fa-clipboard-list me-2"></i>Ver préstamos activos</a></li>
+                        <li class="list-group-item"><a href="/prestamos/prestar"><i class="fas fa-hand-holding-usd me-2"></i>Prestar un libro</a></li>
+                        <li class="list-group-item"><a href="/prestamos/devolver"><i class="fas fa-undo-alt me-2"></i>Devolver un libro</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

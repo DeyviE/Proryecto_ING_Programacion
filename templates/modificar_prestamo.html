@@ -1,46 +1,59 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Préstamo</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Modificar Préstamo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
     <h1>Modificar Préstamo (ID: {{ prestamo_id }})</h1>
     <form action="/prestamos/modificar/{{ prestamo_id }}" method="POST">
-        <label for="nuevo_libro_id">Nuevo ID de Libro:</label><br>
-        <input type="number" id="nuevo_libro_id" name="nuevo_libro_id" required><br><br>
-        <label for="nuevo_usuario_id">Nuevo ID de Usuario:</label><br>
-        <input type="number" id="nuevo_usuario_id" name="nuevo_usuario_id" required><br><br>
-        <label for="nueva_fecha_prestamo">Nueva Fecha de Préstamo (YYYY-MM-DD):</label><br>
-        <input type="date" id="nueva_fecha_prestamo" name="nueva_fecha_prestamo" required><br><br>
+        <div class="mb-3">
+            <label for="nuevo_libro_id" class="form-label">Nuevo ID de Libro:</label>
+            <input type="number" id="nuevo_libro_id" name="nuevo_libro_id" class="form-control" value="{{ prestamo.libro_id }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_usuario_id" class="form-label">Nuevo ID de Usuario:</label>
+            <input type="number" id="nuevo_usuario_id" name="nuevo_usuario_id" class="form-control" value="{{ prestamo.usuario_id }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nueva_fecha_prestamo" class="form-label">Nueva Fecha de Préstamo (YYYY-MM-DD):</label>
+            <input type="date" id="nueva_fecha_prestamo" name="nueva_fecha_prestamo" class="form-control" value="{{ prestamo.fecha_prestamo }}" required>
+        </div>
         
-        <input type="checkbox" id="devolver" name="devolver" onchange="toggleDevolucionDate()">
-        <label for="devolver">¿Ya se devolvió el libro?</label><br><br>
-
-        <div id="fechaDevolucionDiv" style="display: none;">
-            <label for="nueva_fecha_devolucion">Nueva Fecha de Devolución (YYYY-MM-DD):</label><br>
-            <input type="date" id="nueva_fecha_devolucion" name="nueva_fecha_devolucion"><br><br>
+        <div class="form-check mb-3">
+            <input type="checkbox" id="devolver" name="devolver" class="form-check-input" onchange="toggleDevolucionDate()" {% if prestamo.fecha_devolucion %}checked{% endif %}>
+            <label class="form-check-label" for="devolver">¿Ya se devolvió el libro?</label>
         </div>
 
-        <input type="submit" value="Guardar Cambios">
+        <div id="fechaDevolucionDiv" {% if not prestamo.fecha_devolucion %}style="display: none;"{% endif %}>
+            <div class="mb-3">
+                <label for="nueva_fecha_devolucion" class="form-label">Nueva Fecha de Devolución (YYYY-MM-DD):</label>
+                <input type="date" id="nueva_fecha_devolucion" name="nueva_fecha_devolucion" class="form-control" value="{{ prestamo.fecha_devolucion if prestamo.fecha_devolucion else '' }}">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 
     <script>
         function toggleDevolucionDate() {
             var checkbox = document.getElementById("devolver");
             var fechaDevolucionDiv = document.getElementById("fechaDevolucionDiv");
+            var fechaDevolucionInput = document.getElementById("nueva_fecha_devolucion");
             if (checkbox.checked) {
                 fechaDevolucionDiv.style.display = "block";
-                document.getElementById("nueva_fecha_devolucion").setAttribute("required", "required");
+                fechaDevolucionInput.setAttribute("required", "required");
             } else {
                 fechaDevolucionDiv.style.display = "none";
-                document.getElementById("nueva_fecha_devolucion").removeAttribute("required");
-                document.getElementById("nueva_fecha_devolucion").value = ""; // Clear the date if unchecked
+                fechaDevolucionInput.removeAttribute("required");
+                fechaDevolucionInput.value = ""; // Clear the date if unchecked
             }
         }
+        // Llamar en carga inicial para ajustar según el estado del préstamo
+        document.addEventListener('DOMContentLoaded', toggleDevolucionDate);
     </script>
-    <br>
-    <a href="/prestamos">Volver a la Lista de Préstamos</a> | <a href="/">Volver al Menú Principal</a>
-</body>
-</html>
+    <div class="mt-4">
+        <a href="/prestamos" class="btn btn-secondary">Volver a la Lista de Préstamos</a>
+        <a href="/" class="btn btn-secondary">Volver al Menú Principal</a>
+    </div>
+</div>
+{% endblock %}

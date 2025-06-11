@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devolver Libro</title>
-</head>
-<body>
-    <h1>Devolver Libro</h1>
-    <form action="/prestamos/devolver" method="POST">
-        <label for="libro_id">ID del Libro a Devolver:</label><br>
-        <input type="number" id="libro_id" name="libro_id" required><br><br>
-        <input type="submit" value="Devolver Libro">
-    </form>
-    <br>
-    <a href="/prestamos">Volver a la Lista de Préstamos</a> | <a href="/">Volver al Menú Principal</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Devolver Libro{% endblock %}
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="h3 mb-0 text-white">Devolver Libro</h1>
+        </div>
+        <div class="card-body">
+            <form action="/prestamos/devolver" method="POST">
+                <div class="mb-3">
+                    <label for="libro_id" class="form-label">ID del Libro a Devolver:</label>
+                    <input type="number" class="form-control" id="libro_id" name="libro_id" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Devolver Libro</button>
+            </form>
+        </div>
+        <div class="card-footer text-end">
+            <a href="/prestamos" class="btn btn-secondary btn-sm">Volver a la Lista de Préstamos</a>
+            <a href="/" class="btn btn-info btn-sm">Volver al Menú Principal</a>
+        </div>
+    </div>
+{% endblock %}

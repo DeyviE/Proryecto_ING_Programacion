@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Préstamos</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Lista de Préstamos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
     <h1>Lista de Préstamos</h1>
-    <a href="/prestamos/prestar">Realizar Nuevo Préstamo</a>
-    <table border="1">
+    <a href="/prestamos/prestar" class="btn btn-primary mb-3">Realizar Nuevo Préstamo</a>
+    
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>ID Préstamo</th>
@@ -26,15 +25,30 @@
                 <td>{{ prestamo.titulo_libro }}</td>
                 <td>{{ prestamo.nombre_usuario }}</td>
                 <td>{{ prestamo.fecha_prestamo }}</td>
-                <td>{{ prestamo.fecha_devolucion }}</td>
                 <td>
-                    <a href="/prestamos/modificar/{{ prestamo.prestamo_id }}">Modificar</a>
+                    {% if prestamo.fecha_devolucion %}
+                        {{ prestamo.fecha_devolucion }}
+                    {% else %}
+                        <span class="badge bg-danger">Pendiente</span>
+                    {% endif %}
                 </td>
+                <td>
+                    <a href="/prestamos/modificar/{{ prestamo.prestamo_id }}" class="btn btn-info btn-sm">Modificar</a>
+                    {% if not prestamo.fecha_devolucion %}
+                    <a href="/prestamos/devolver_confirm/{{ prestamo.libro_id }}" class="btn btn-success btn-sm">Devolver</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No hay préstamos registrados.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <br>
-    <a href="/">Volver al Menú Principal</a>
-</body>
-</html>
+    
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">Volver al Menú Principal</a>
+    </div>
+</div>
+{% endblock %}

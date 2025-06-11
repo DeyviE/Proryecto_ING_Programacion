@@ -1,22 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Libro</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Modificar Libro{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
     <h1>Modificar Libro (ID: {{ libro_id }})</h1>
     <form action="/libros/modificar/{{ libro_id }}" method="POST">
-        <label for="nuevo_titulo">Nuevo Título:</label><br>
-        <input type="text" id="nuevo_titulo" name="nuevo_titulo" required><br><br>
-        <label for="nuevo_autor">Nuevo Autor:</label><br>
-        <input type="text" id="nuevo_autor" name="nuevo_autor" required><br><br>
-        <label for="nuevo_isbn">Nuevo ISBN:</label><br>
-        <input type="text" id="nuevo_isbn" name="nuevo_isbn" required><br><br>
-        <input type="submit" value="Guardar Cambios">
+        <div class="mb-3">
+            <label for="nuevo_titulo" class="form-label">Nuevo Título:</label>
+            <input type="text" id="nuevo_titulo" name="nuevo_titulo" class="form-control" value="{{ libro.titulo }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_autor" class="form-label">Nuevo Autor:</label>
+            <input type="text" id="nuevo_autor" name="nuevo_autor" class="form-control" value="{{ libro.autor }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_isbn" class="form-label">Nuevo ISBN:</label>
+            <input type="text" id="nuevo_isbn" name="nuevo_isbn" class="form-control" value="{{ libro.isbn }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
-    <br>
-    <a href="/libros">Volver a la Lista de Libros</a> | <a href="/">Volver al Menú Principal</a>
-</body>
-</html>
+    <div class="mt-4">
+        <a href="/libros" class="btn btn-secondary">Volver a la Lista de Libros</a>
+        <a href="/" class="btn btn-secondary">Volver al Menú Principal</a>
+    </div>
+</div>
+{% endblock %}

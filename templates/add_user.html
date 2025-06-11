@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial="1.0">
-    <title>Agregar Usuario</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Agregar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
     <h1>Agregar Nuevo Usuario</h1>
     <form action="/usuarios/agregar" method="POST">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" required><br><br>
-        <label for="correo">Correo:</label><br>
-        <input type="email" id="correo" name="correo" required><br><br>
-        <input type="submit" value="Agregar Usuario">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="email" id="correo" name="correo" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Usuario</button>
     </form>
-    <br>
-    <a href="/usuarios">Volver a la Lista de Usuarios</a> | <a href="/">Volver al Menú Principal</a>
-</body>
-</html>
+    <div class="mt-4">
+        <a href="/usuarios" class="btn btn-secondary">Volver a la Lista de Usuarios</a>
+        <a href="/" class="btn btn-secondary">Volver al Menú Principal</a>
+    </div>
+</div>
+{% endblock %}
